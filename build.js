@@ -13,6 +13,10 @@ const SITE_URL = 'https://oshebe.netlify.app'; // cambiar cuando haya dominio pr
 const WA_NUMBER = '573023350442';
 const EMAIL = 'inmobiliariaoshebe@gmail.com';
 const WA_GENERIC = waLink('Hola Oshebe, quiero información de inmuebles en Santa Marta');
+const WA_VENDER = waLink('Hola Oshebe, quiero vender o arrendar mi inmueble en Santa Marta. ¿Me pueden asesorar?');
+function mailLink(subject){ return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject); }
+const ZONAS = ['El Rodadero','Bello Horizonte','Pozos Colorados','Centro Histórico','Gaira','Mamatoco','Bavaria','Ciudad del Sol','Irotama','Taganga','Minca'];
+const TIPOS = ['Casa','Apartamento','Apartaestudio','Local','Oficina','Bodega','Lote','Finca'];
 
 const SRC = __dirname;
 const OUT = path.join(SRC, 'dist');
@@ -183,6 +187,43 @@ const CSS_INDEX = CSS_ROOT + `
   .card-photo-link{display:block}
   .card.soon{display:grid;place-items:center;text-align:center;padding:26px;background:var(--surface-2);border-style:dashed}
   .soon-ic{font-size:2rem;margin-bottom:8px} .card.soon h3{font-size:1.15rem;margin-bottom:8px} .card.soon p{color:var(--muted);font-size:.92rem;margin:0 0 16px}
+  .card .tag-tipo{position:absolute; top:12px; right:12px; background:rgba(11,21,38,.62); color:#fff; font-size:.72rem; font-weight:700; padding:5px 10px; border-radius:999px; z-index:2; backdrop-filter:blur(3px)}
+
+  /* FILTER BAR */
+  .filterbar{background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); padding:12px; display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:28px}
+  .filterbar .field{padding:6px 12px}
+  .filterbar .field+.field{border-left:1px solid var(--line)}
+  .filterbar label{display:block; font-size:.66rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; margin-bottom:3px}
+  .filterbar select{width:100%; border:0; background:transparent; color:var(--ink); font-family:var(--sans); font-size:.98rem; font-weight:600; padding:2px 0}
+  .filterbar select:focus{outline:none}
+  @media(max-width:820px){ .filterbar{grid-template-columns:1fr 1fr} .filterbar .field+.field{border-left:0} }
+  .nores{display:none; text-align:center; color:var(--muted); background:var(--surface-2); border:1px dashed var(--line); border-radius:12px; padding:30px; grid-column:1/-1}
+  .nores a{color:var(--accent); font-weight:700}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:44px; align-items:center}
+  @media(max-width:820px){ .about-grid{grid-template-columns:1fr} }
+  .about-photo{border-radius:var(--radius); box-shadow:var(--shadow); aspect-ratio:4/3; background-size:cover; background-position:center; min-height:260px; position:relative; overflow:hidden}
+  .about-photo::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 55%,rgba(11,21,38,.35))}
+  .about h2{font-size:clamp(1.8rem,3.6vw,2.5rem); margin-bottom:16px}
+  .about .lead{margin:0 0 22px}
+  .values{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  @media(max-width:520px){ .values{grid-template-columns:1fr} }
+  .value{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px}
+  .value .vic{font-size:1.5rem; line-height:1} .value h4{font-family:var(--serif); font-size:1.02rem; margin:8px 0 4px} .value p{margin:0; font-size:.88rem; color:var(--muted)}
+
+  /* CONTACT */
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:center}
+  @media(max-width:760px){ .contact-grid{grid-template-columns:1fr} }
+  .contact-cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px}
+  .btn-mail{background:transparent; color:var(--ink); border:1.5px solid var(--line)}
+  :root:not([data-theme="light"]) .btn-mail{color:var(--ink)}
+  .btn-mail:hover{border-color:var(--gold)}
+  .contact-info{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:10px 24px; box-shadow:var(--shadow)}
+  .contact-info a, .contact-info div{display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); font-weight:600; color:var(--ink)}
+  .contact-info a:last-child, .contact-info div:last-child{border-bottom:0}
+  .contact-info a:hover{color:var(--accent)}
+  .contact-info .ci{font-size:1.25rem; width:26px; text-align:center}
 `;
 
 const CSS_FICHA = CSS_ROOT + `
@@ -288,17 +329,21 @@ function card(p){
   if(p.habitaciones != null && p.habitaciones !== '') specs.push('<span><svg class="ico" viewBox="0 0 24 24"><path d="M3 12h18M5 12V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5M4 18h16M6 18v2M18 18v2"/></svg> ' + esc(p.habitaciones) + ' hab</span>');
   if(p.banos != null && p.banos !== '') specs.push('<span><svg class="ico" viewBox="0 0 24 24"><path d="M5 11V6a2 2 0 0 1 2-2 2 2 0 0 1 2 2M4 11h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/></svg> ' + esc(p.banos) + ' baños</span>');
   if(p.area_m2 != null && p.area_m2 !== '') specs.push('<span><svg class="ico" viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 3v18"/></svg> ' + esc(p.area_m2) + ' m²</span>');
+  const tipo = p.tipo || '';
+  const zona = p.zona || '';
   const loc = [p.sector, p.ciudad].filter(Boolean).join(' · ');
-  return `        <article class="card">
+  const locLine = [tipo, loc].filter(Boolean).join(' · ');
+  const tipoTag = tipo ? '<span class="tag-tipo">' + esc(tipo) + '</span>' : '';
+  return `        <article class="card" data-op="${esc(p.operacion || '')}" data-tipo="${esc(tipo)}" data-zona="${esc(zona)}" data-hab="${esc(p.habitaciones != null ? p.habitaciones : '')}">
           <a href="${href}" class="card-photo-link">
             <div class="photo real" data-loc="${esc(p.sector || p.ciudad || '')}" style="background-image:url('${esc(foto)}')">
-              <div class="card-tags"><span class="tag ${tagCls}">${tagTxt}</span></div>${videoBadge}
+              <div class="card-tags"><span class="tag ${tagCls}">${tagTxt}</span></div>${tipoTag}${videoBadge}
             </div>
           </a>
           <div class="card-body">
             <div class="price">${fmtPrecio(p.precio, p.operacion)}</div>
             <h3>${esc(p.titulo)}</h3>
-            <div class="loc">📍 ${esc(loc)}</div>
+            <div class="loc">📍 ${esc(locLine)}</div>
             <div class="specs">${specs.join('\n              ')}</div>
             <div class="card-actions"><a class="btn btn-sm btn-navy" href="${href}">Ver detalles</a><a class="btn-share" href="${href}" style="text-decoration:none">↗ Ver fotos</a></div>
           </div>
@@ -311,6 +356,14 @@ function renderIndex(props){
   const ogImg = destacado && destacado.fotos && destacado.fotos[0]
     ? SITE_URL + destacado.fotos[0].imagen : SITE_URL + '/assets/emblema.png';
   const cards = props.map(card).join('\n\n');
+  // Fotos reales de Santa Marta para la portada (mar, sierra, terraza).
+  // Se pueden cambiar por otras subiendo imágenes y editando estas rutas.
+  const heroA = '/img/inmuebles/990102/p09.jpg';
+  const heroB = '/img/inmuebles/990102/p06.jpg';
+  const heroC = '/img/inmuebles/990102/p10.jpg';
+  const aboutPhoto = '/img/inmuebles/990102/p02.jpg';
+  const zonaOpts = ZONAS.map(function(z){ return '<option value="' + esc(z) + '">' + esc(z) + '</option>'; }).join('');
+  const tipoOpts = TIPOS.map(function(t){ return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join('');
   return head({
     title: 'Inmobiliaria Oshebe · Inmuebles en Santa Marta',
     desc: 'Casas, apartamentos y locales en venta y arriendo en Santa Marta. Fotos reales, recorridos en video y asesoría directa por WhatsApp.',
@@ -323,9 +376,8 @@ function renderIndex(props){
   <a class="brand" href="/">${brandMark}${wordmark}</a>
   <nav class="nav-links">
     <a href="#inmuebles">Inmuebles</a>
-    <a href="#zonas">Zonas</a>
-    <a href="#video">Recorridos</a>
     <a href="#nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
   </nav>
   <a class="btn btn-wa" href="${WA_GENERIC}">${WA_ICON} WhatsApp</a>
 </div></header>
@@ -339,18 +391,18 @@ function renderIndex(props){
         <p class="lead">Casas, apartamentos y locales en venta y arriendo en las mejores zonas de Santa Marta. Fotos reales, recorridos en video y asesoría directa por WhatsApp.</p>
         <div class="hero-cta">
           <a class="btn btn-wa" href="#inmuebles">Ver inmuebles</a>
-          <a class="btn btn-ghost" href="#nosotros">Cómo trabajamos</a>
+          <a class="btn btn-ghost" href="#contacto">Contáctanos</a>
         </div>
         <div class="stats">
-          <div class="stat"><b>Santa Marta</b><span>y toda la región</span></div>
+          <div class="stat"><b>+10 años</b><span>de experiencia</span></div>
           <div class="stat"><b>Venta y arriendo</b><span>casas, aptos y locales</span></div>
-          <div class="stat"><b>WhatsApp</b><span>respuesta directa</span></div>
+          <div class="stat"><b>Atención directa</b><span>WhatsApp y correo</span></div>
         </div>
       </div>
       <div class="collage">
-        <div class="photo sc1" data-loc="El Rodadero"><div class="sun"></div><div class="ridge"></div></div>
-        <div class="photo sc2" data-loc="Bello Horizonte"><div class="sun"></div><div class="ridge"></div></div>
-        <div class="photo sc6" data-loc="Minca · Sierra Nevada"><div class="ridge"></div></div>
+        <div class="photo real" data-loc="Frente al mar" style="background-image:url('${heroA}')"><div class="ridge"></div></div>
+        <div class="photo real" data-loc="Sierra Nevada" style="background-image:url('${heroB}')"><div class="ridge"></div></div>
+        <div class="photo real" data-loc="Bello Horizonte" style="background-image:url('${heroC}')"><div class="ridge"></div></div>
       </div>
     </div>
   </section>
@@ -359,56 +411,70 @@ function renderIndex(props){
     <div class="wrap">
       <div class="sec-head">
         <div>
-          <span class="eyebrow">Destacados</span>
-          <h2>Inmuebles seleccionados</h2>
-          <p>Cada inmueble tiene su propia página con galería de fotos, video y mapa — lista para enviar por WhatsApp con un solo enlace.</p>
+          <span class="eyebrow">Nuestra selección</span>
+          <h2>Inmuebles en venta y arriendo en Santa Marta</h2>
+          <p>Explora casas, apartamentos y locales. Filtra por operación, tipo o zona y contáctanos por WhatsApp o correo para agendar tu visita.</p>
         </div>
-        <a class="btn btn-ghost" href="#inmuebles">Ver todos</a>
       </div>
-      <div class="grid">
+      <div class="filterbar">
+        <div class="field"><label>Operación</label><select id="fOp"><option value="">Todas</option><option value="venta">En venta</option><option value="arriendo">En arriendo</option></select></div>
+        <div class="field"><label>Tipo</label><select id="fTipo"><option value="">Todos</option>${tipoOpts}</select></div>
+        <div class="field"><label>Zona</label><select id="fZona"><option value="">Todas las zonas</option>${zonaOpts}</select></div>
+        <div class="field"><label>Habitaciones</label><select id="fHab"><option value="">Cualquiera</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></div>
+      </div>
+      <div class="grid" id="grid">
 ${cards}
-
-        <div class="card soon">
-          <div>
-            <div class="soon-ic">🏝️</div>
-            <h3>Muy pronto, más inmuebles</h3>
-            <p>Estamos publicando nuevas propiedades en Santa Marta. Escríbenos y te avisamos apenas tengamos lo que buscas.</p>
-            <a class="btn btn-wa" href="${WA_GENERIC}">Escríbenos por WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="zonas" class="band">
-    <div class="wrap">
-      <div class="sec-head"><div>
-        <span class="eyebrow">Explora por sector</span>
-        <h2>Zonas de Santa Marta</h2>
-        <p>Filtra por el sector que te interesa y ayuda a tus clientes a encontrar exactamente dónde quieren vivir o invertir.</p>
-      </div></div>
-      <div class="zones">
-        <span class="chip">El Rodadero</span><span class="chip">Bello Horizonte</span><span class="chip">Pozos Colorados</span>
-        <span class="chip">Centro Histórico</span><span class="chip">Gaira</span><span class="chip">Minca</span>
-        <span class="chip">Taganga</span><span class="chip">Bavaria</span><span class="chip">Ciudad del Sol</span>
+        <div class="nores" id="nores">No encontramos inmuebles con esos filtros. <a href="${WA_GENERIC}">Escríbenos por WhatsApp</a> y te ayudamos a encontrar lo que buscas.</div>
       </div>
     </div>
   </section>
 
   <section id="nosotros" class="band">
-    <div class="wrap trust">
-      <div class="item"><span class="num">01</span><h3>Publicas tú misma</h3><p>Entras a tu panel con usuario y clave, subes fotos, pegas el video y el inmueble queda publicado. Sin depender de nadie.</p></div>
-      <div class="item"><span class="num">02</span><h3>Te encuentran en Google</h3><p>Cada inmueble es su propia página optimizada, para que aparezcas cuando busquen "apartamentos en Santa Marta".</p></div>
-      <div class="item"><span class="num">03</span><h3>Compartes por WhatsApp</h3><p>Cada propiedad tiene su enlace. Lo envías y el cliente ve fotos, video e información al instante desde el celular.</p></div>
+    <div class="wrap about-grid">
+      <div class="about-photo" style="background-image:url('${aboutPhoto}')"></div>
+      <div class="about">
+        <span class="eyebrow">Sobre nosotros</span>
+        <h2>Más de 10 años haciendo de Santa Marta tu hogar</h2>
+        <p class="lead">En Inmobiliaria Oshebe llevamos más de una década acompañando a familias e inversionistas a encontrar el lugar perfecto frente al mar y la sierra. Conocemos cada rincón de Santa Marta y ponemos esa experiencia a tu servicio para que compres, vendas o arriendes con total confianza y tranquilidad.</p>
+        <div class="values">
+          <div class="value"><div class="vic">🏆</div><h4>+10 años de experiencia</h4><p>Una trayectoria sólida en el mercado inmobiliario de Santa Marta y el Magdalena.</p></div>
+          <div class="value"><div class="vic">📍</div><h4>Conocimiento local</h4><p>Asesoría real sobre cada zona, precios justos y las mejores oportunidades.</p></div>
+          <div class="value"><div class="vic">🤝</div><h4>Acompañamiento total</h4><p>Te guiamos en todo el proceso: visitas, negociación, documentos y cierre.</p></div>
+          <div class="value"><div class="vic">✅</div><h4>Transparencia</h4><p>Información clara y atención personalizada, sin sorpresas ni letra pequeña.</p></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section>
     <div class="wrap">
       <div class="cta-band">
-        <h2>¿Tienes un inmueble para vender o arrendar?</h2>
-        <p>Publícalo con Oshebe y llega a compradores e inquilinos en toda Santa Marta.</p>
-        <a class="btn btn-wa" href="${WA_GENERIC}">Escríbenos por WhatsApp</a>
+        <h2>¿Quieres vender o arrendar tu inmueble?</h2>
+        <p>Publícalo con Oshebe y llega a compradores e inquilinos en toda Santa Marta. Nos encargamos de las fotos, la difusión y la atención. Cuéntanos de tu propiedad.</p>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; position:relative">
+          <a class="btn btn-wa" href="${WA_VENDER}">${WA_ICON} Escríbenos por WhatsApp</a>
+          <a class="btn" href="${mailLink('Quiero vender o arrendar mi inmueble')}" style="background:rgba(255,255,255,.12); color:#fff; border:1.5px solid rgba(255,255,255,.45)">✉️ Enviar correo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="band">
+    <div class="wrap contact-grid">
+      <div>
+        <span class="eyebrow">Contacto</span>
+        <h2>Hablemos de tu próximo hogar</h2>
+        <p class="lead">Estamos para ayudarte a encontrar, vender o arrendar tu propiedad en Santa Marta. Escríbenos y te respondemos personalmente.</p>
+        <div class="contact-cta">
+          <a class="btn btn-wa" href="${WA_GENERIC}">${WA_ICON} WhatsApp</a>
+          <a class="btn btn-mail" href="${mailLink('Consulta de inmueble')}">✉️ Enviar correo</a>
+        </div>
+      </div>
+      <div class="contact-info">
+        <a href="${WA_GENERIC}"><span class="ci">📱</span> +57 302 335 0442</a>
+        <a href="${mailLink('Consulta de inmueble')}"><span class="ci">✉️</span> ${EMAIL}</a>
+        <a href="https://instagram.com/inmobiliariaoshebe"><span class="ci">📷</span> @inmobiliariaoshebe</a>
+        <div><span class="ci">📍</span> Santa Marta, Magdalena — Colombia</div>
       </div>
     </div>
   </section>
@@ -423,7 +489,7 @@ ${cards}
       </div>
       <div>
         <h4>Explora</h4>
-        <a href="#inmuebles">Inmuebles</a><a href="#zonas">Zonas</a><a href="#video">Recorridos</a>
+        <a href="#inmuebles">Inmuebles</a><a href="#nosotros">Nosotros</a><a href="#contacto">Contacto</a>
       </div>
       <div>
         <h4>Contacto</h4>
@@ -439,6 +505,28 @@ ${cards}
     </div>
   </div>
 </footer>
+<script>
+(function(){
+  var grid = document.getElementById('grid');
+  if(!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.card[data-op]'));
+  var fOp = document.getElementById('fOp'), fTipo = document.getElementById('fTipo'), fZona = document.getElementById('fZona'), fHab = document.getElementById('fHab');
+  var nores = document.getElementById('nores');
+  function apply(){
+    var vis = 0;
+    cards.forEach(function(c){
+      var ok = (!fOp.value || c.dataset.op === fOp.value)
+        && (!fTipo.value || c.dataset.tipo === fTipo.value)
+        && (!fZona.value || c.dataset.zona === fZona.value)
+        && (!fHab.value || (parseInt(c.dataset.hab || '0', 10) >= parseInt(fHab.value, 10)));
+      c.style.display = ok ? '' : 'none';
+      if(ok) vis++;
+    });
+    if(nores) nores.style.display = vis ? 'none' : 'block';
+  }
+  [fOp, fTipo, fZona, fHab].forEach(function(s){ if(s) s.addEventListener('change', apply); });
+})();
+</script>
 </body>
 </html>`;
 }

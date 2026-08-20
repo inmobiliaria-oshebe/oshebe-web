@@ -28,6 +28,16 @@ content:
         default: venta
         options:
           values: [venta, arriendo]
+      - name: tipo
+        label: Tipo de inmueble
+        type: select
+        options:
+          values: [Casa, Apartamento, Apartaestudio, Local, Oficina, Bodega, Lote, Finca]
+      - name: zona
+        label: Zona
+        type: select
+        options:
+          values: [El Rodadero, Bello Horizonte, Pozos Colorados, Centro Histórico, Gaira, Mamatoco, Bavaria, Ciudad del Sol, Irotama, Taganga, Minca]
       - name: precio
         label: Precio (en pesos, sin puntos)
         type: number
