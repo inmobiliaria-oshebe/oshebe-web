@@ -1,0 +1,58 @@
+{
+  "ref": "990103",
+  "titulo": "Apartamento en Sector Bavaria Santa Marta.",
+  "operacion": "venta",
+  "tipo": "Apartamento",
+  "zona": "Bavaria",
+  "precio": 400000000,
+  "sector": "Bavaria",
+  "ciudad": "Santa Marta",
+  "area_m2": 100,
+  "habitaciones": 3,
+  "banos": 2,
+  "piso": "5",
+  "estrato": "6",
+  "descripcion": "## Apartamento en venta y alquiler – Sector Bavaria, Santa Marta\n\nAmplio y cómodo apartamento de **100 m²**, ubicado en el exclusivo **sector Bavaria de Santa Marta**, una zona residencial de alta valorización, con excelente ubicación y acceso a servicios, comercio y vías principales.\n\nEl apartamento se encuentra en un **quinto piso con ascensor** y cuenta con **seguridad 24 horas**, ofreciendo tranquilidad y comodidad para sus residentes.\n\n### Distribución\n\n- 3 habitaciones.\n- 3 baños, de los cuales **2 son internos**.\n- Sala.\n- Comedor.\n- Cocina integral amplia.\n- Zona de labores.\n- No cuenta con balcón.\n- No cuenta con parqueadero.\n\n**Estrato:** 6  \n**Área:** 100 m²  \n**Piso:** 5.º, con ascensor  \n**Seguridad:** Vigilancia 24 horas.\n\n### Precio de venta\n\n**$400.000.000 negociables**\n\n### Precio de alquiler\n\n**$2.500.000 mensuales**, con administración incluida.\n\nUna excelente opción para quienes buscan un apartamento amplio en una de las zonas residenciales más tradicionales y valorizadas de Santa Marta, tanto para vivienda como para inversión.",
+  "caracteristicas": [
+    "Vigilancia 24 Horas",
+    "Ascensor",
+    "Cerca Ocean Mall y vias principales"
+  ],
+  "fotos": [
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-38-11 1.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/~tmpDA_PHOTO-2026-01-27-16-38-11.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-38-14 1.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-38-13 2.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/~tmp7D_PHOTO-2026-01-27-16-38-13.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/~tmp42_PHOTO-2026-01-27-16-38-13.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-53-01 1.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-53-01.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-38-13 3.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-38-13 5.jpg"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-01-27-16-38-13 6.jpg"
+    }
+  ],
+  "destacado": true,
+  "publicado": true
+}
