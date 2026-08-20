@@ -132,7 +132,22 @@ const CSS_INDEX = CSS_ROOT + `
   .collage .photo:nth-child(1){grid-row:1/3; height:100%}
   .collage .photo:nth-child(2){height:200px}
   .collage .photo:nth-child(3){height:150px}
-  @media(max-width:820px){ .hero-grid{grid-template-columns:1fr} .collage{grid-template-rows:160px 120px} }
+  /* HERO con collage de fondo */
+  .hero-bg{position:relative; padding:0; min-height:560px; display:flex; align-items:center; overflow:hidden}
+  .hero-collage{position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; z-index:0}
+  .hero-collage>div{background-size:cover; background-position:center}
+  .hero-overlay{position:absolute; inset:0; z-index:1; background:linear-gradient(100deg, rgba(9,17,32,.90) 0%, rgba(9,17,32,.70) 42%, rgba(9,17,32,.45) 100%)}
+  .hero-content{position:relative; z-index:2; padding-block:66px}
+  .hero-content h1{color:#fff}
+  .hero-content h1 em{color:var(--gold-2)}
+  .hero-content .lead{color:rgba(255,255,255,.92); max-width:50ch}
+  .eyebrow.light{color:var(--gold-2)}
+  .btn-ghost-light{background:rgba(255,255,255,.12); color:#fff; border:1.5px solid rgba(255,255,255,.55)}
+  .btn-ghost-light:hover{border-color:var(--gold-2); background:rgba(255,255,255,.2)}
+  .stats-light{border-top-color:rgba(255,255,255,.25)}
+  .stats-light .stat b{color:#fff}
+  .stats-light .stat span{color:rgba(255,255,255,.82)}
+  @media(max-width:820px){ .hero-grid{grid-template-columns:1fr} .collage{grid-template-rows:160px 120px} .hero-bg{min-height:500px} .hero-content{padding-block:48px} }
   section{padding:56px 0}
   .sec-head{display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:30px}
   .sec-head h2{font-size:clamp(1.8rem,3.6vw,2.5rem)}
@@ -356,11 +371,8 @@ function renderIndex(props){
   const ogImg = destacado && destacado.fotos && destacado.fotos[0]
     ? SITE_URL + destacado.fotos[0].imagen : SITE_URL + '/assets/emblema.png';
   const cards = props.map(card).join('\n\n');
-  // Fotos reales de Santa Marta para la portada (mar, sierra, terraza).
-  // Se pueden cambiar por otras subiendo imágenes y editando estas rutas.
-  const heroA = '/img/inmuebles/990102/p09.jpg';
-  const heroB = '/img/inmuebles/990102/p06.jpg';
-  const heroC = '/img/inmuebles/990102/p10.jpg';
+  // El hero usa un collage de fondo con fotos de Santa Marta (img/portada/sm1..sm4.jpg).
+  // Para "Nosotros" se usa una foto nítida del inmueble.
   const aboutPhoto = '/img/inmuebles/990102/p02.jpg';
   const zonaOpts = ZONAS.map(function(z){ return '<option value="' + esc(z) + '">' + esc(z) + '</option>'; }).join('');
   const tipoOpts = TIPOS.map(function(t){ return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join('');
@@ -383,26 +395,26 @@ function renderIndex(props){
 </div></header>
 
 <main>
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="eyebrow">Santa Marta · Magdalena</span>
-        <h1>Encuentra tu lugar frente al <em>mar y la sierra</em></h1>
-        <p class="lead">Casas, apartamentos y locales en venta y arriendo en las mejores zonas de Santa Marta. Fotos reales, recorridos en video y asesoría directa por WhatsApp.</p>
-        <div class="hero-cta">
-          <a class="btn btn-wa" href="#inmuebles">Ver inmuebles</a>
-          <a class="btn btn-ghost" href="#contacto">Contáctanos</a>
-        </div>
-        <div class="stats">
-          <div class="stat"><b>+10 años</b><span>de experiencia</span></div>
-          <div class="stat"><b>Venta y arriendo</b><span>casas, aptos y locales</span></div>
-          <div class="stat"><b>Atención directa</b><span>WhatsApp y correo</span></div>
-        </div>
+  <section class="hero hero-bg">
+    <div class="hero-collage" aria-hidden="true">
+      <div style="background-image:url('/img/portada/sm1.jpg')"></div>
+      <div style="background-image:url('/img/portada/sm2.jpg')"></div>
+      <div style="background-image:url('/img/portada/sm3.jpg')"></div>
+      <div style="background-image:url('/img/portada/sm4.jpg')"></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-content">
+      <span class="eyebrow light">Santa Marta · Magdalena</span>
+      <h1>Encuentra tu lugar frente al <em>mar y la sierra</em></h1>
+      <p class="lead light">Casas, apartamentos y locales en venta y arriendo en las mejores zonas de Santa Marta. Asesoría directa y personalizada por WhatsApp y correo.</p>
+      <div class="hero-cta">
+        <a class="btn btn-wa" href="#inmuebles">Ver inmuebles</a>
+        <a class="btn btn-ghost-light" href="#contacto">Contáctanos</a>
       </div>
-      <div class="collage">
-        <div class="photo real" data-loc="Frente al mar" style="background-image:url('${heroA}')"><div class="ridge"></div></div>
-        <div class="photo real" data-loc="Sierra Nevada" style="background-image:url('${heroB}')"><div class="ridge"></div></div>
-        <div class="photo real" data-loc="Bello Horizonte" style="background-image:url('${heroC}')"><div class="ridge"></div></div>
+      <div class="stats stats-light">
+        <div class="stat"><b>+10 años</b><span>de experiencia</span></div>
+        <div class="stat"><b>Venta y arriendo</b><span>casas, aptos y locales</span></div>
+        <div class="stat"><b>Atención directa</b><span>WhatsApp y correo</span></div>
       </div>
     </div>
   </section>
