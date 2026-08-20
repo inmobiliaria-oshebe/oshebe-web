@@ -1,0 +1,87 @@
+{
+  "ref": "990104",
+  "titulo": "Amplio y moderno apartamento en el sector Bavaria",
+  "operacion": "venta",
+  "tipo": "Apartamento",
+  "zona": "Bavaria",
+  "precio": 550000000,
+  "administracion": 800000,
+  "sector": "Bavaria",
+  "ciudad": "Santa Marta",
+  "area_m2": 109,
+  "habitaciones": 2,
+  "banos": 2,
+  "garajes": 1,
+  "piso": "3",
+  "estrato": "6",
+  "descripcion": "**Se vende amplio apartamento en el exclusivo Edificio Bambú, ubicado en el reconocido barrio Bavaria, en Santa Marta. Su excelente ubicación lo sitúa cerca a la iglesia de Bavaria y al Ocean Mall, en una zona residencial tranquila y de gran valorización.**\n\n**Área: 109 m²**  \n**Piso: 3**  \n**Estrato: 6**\n\n**El apartamento consta de:**\n\n- **2 habitaciones (una con baño interno).**\n- **2 baños en total.**\n- **Sala y comedor independientes.**\n- **Cocina integral amplia y funcional.**\n- **Terraza amplia ideal para reuniones o descanso.**\n- **1 parqueadero privado.**\n\n",
+  "caracteristicas": [
+    "Admite mascotas",
+    "Armarios empotrados",
+    "Balcon",
+    "Baño en habitacion principal",
+    "Cocina integral"
+  ],
+  "zonas_comunes": [
+    "Ascensor",
+    "Centros comerciales",
+    "Cerca colegios /Universidades",
+    "Piscina",
+    "Salon de eventos",
+    "Vigilancia 24 horas",
+    "Acceso a discapacitados",
+    "Zona Infantil"
+  ],
+  "fotos": [
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (30).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (5).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (26).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (7).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (27).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (10).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (12).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (15).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (16).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (29).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (36).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (31).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (1).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (2).jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001.jpeg"
+    },
+    {
+      "imagen": "/img/inmuebles/V-APT-STM-001 (34).jpeg"
+    }
+  ],
+  "destacado": true,
+  "publicado": true
+}
