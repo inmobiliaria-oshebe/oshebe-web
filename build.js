@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://oshebe.netlify.app'; // cambiar cuando haya dominio propio
+const SITE_URL = 'https://oshebe.pages.dev'; // cambiar cuando haya dominio propio
 const WA_NUMBER = '573023350442';
 const EMAIL = 'inmobiliariaoshebe@gmail.com';
 const WA_GENERIC = waLink('Hola Oshebe, quiero información de inmuebles en Santa Marta');
