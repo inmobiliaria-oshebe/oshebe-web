@@ -218,8 +218,14 @@ const CSS_INDEX = CSS_ROOT + `
   /* ABOUT */
   .about-grid{display:grid; grid-template-columns:1fr 1.05fr; gap:44px; align-items:center}
   @media(max-width:820px){ .about-grid{grid-template-columns:1fr} }
-  .about-photo{border-radius:var(--radius); box-shadow:var(--shadow); aspect-ratio:4/3; background-size:cover; background-position:center; min-height:260px; position:relative; overflow:hidden}
-  .about-photo::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 55%,rgba(11,21,38,.35))}
+  .about-brand{border-radius:var(--radius); box-shadow:var(--shadow); aspect-ratio:4/3; min-height:260px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; text-align:center; padding:28px; position:relative; overflow:hidden; background:linear-gradient(160deg,#FDFCF8,#EFE8D6)}
+  .about-brand::before{content:""; position:absolute; inset:0; background:radial-gradient(circle at 78% 16%, rgba(198,152,47,.18), transparent 55%)}
+  .about-brand>*{position:relative}
+  .about-brand .ab-mark{width:150px; height:150px; object-fit:contain; filter:drop-shadow(0 6px 16px rgba(22,41,77,.14))}
+  .about-brand .ab-pre{display:block; font-family:var(--sans); font-size:.68rem; font-weight:700; letter-spacing:.34em; color:#16294D; margin-bottom:2px}
+  .about-brand .ab-name{font-family:var(--serif); font-size:2rem; font-weight:700; letter-spacing:.04em}
+  .about-brand .ab-name .g{color:#C6982F} .about-brand .ab-name .n{color:#16294D}
+  .about-brand .ab-tag{margin:6px 0 0; font-size:.86rem; color:#5A6579; font-style:italic}
   .about h2{font-size:clamp(1.8rem,3.6vw,2.5rem); margin-bottom:16px}
   .about .lead{margin:0 0 22px}
   .values{display:grid; grid-template-columns:1fr 1fr; gap:14px}
@@ -372,8 +378,6 @@ function renderIndex(props){
     ? SITE_URL + destacado.fotos[0].imagen : SITE_URL + '/assets/emblema.png';
   const cards = props.map(card).join('\n\n');
   // El hero usa un collage de fondo con fotos de Santa Marta (img/portada/sm1..sm4.jpg).
-  // Para "Nosotros" se usa una foto nítida del inmueble.
-  const aboutPhoto = '/img/inmuebles/990102/p02.jpg';
   const zonaOpts = ZONAS.map(function(z){ return '<option value="' + esc(z) + '">' + esc(z) + '</option>'; }).join('');
   const tipoOpts = TIPOS.map(function(t){ return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join('');
   return head({
@@ -443,7 +447,11 @@ ${cards}
 
   <section id="nosotros" class="band">
     <div class="wrap about-grid">
-      <div class="about-photo" style="background-image:url('${aboutPhoto}')"></div>
+      <div class="about-brand">
+        <img class="ab-mark" src="/assets/emblema.png" alt="Inmobiliaria Oshebe" width="150" height="150">
+        <div class="ab-word"><span class="ab-pre">INMOBILIARIA</span><span class="ab-name"><span class="g">OSH</span><span class="n">EBE</span></span></div>
+        <p class="ab-tag">Soluciones Inmobiliarias Integrales</p>
+      </div>
       <div class="about">
         <span class="eyebrow">Sobre nosotros</span>
         <h2>Más de 10 años haciendo de Santa Marta tu hogar</h2>
