@@ -1,0 +1,294 @@
+<title>Pent-House Bello Horizonte · Oshebe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg:#FBFAF6; --surface:#FFFFFF; --surface-2:#F4F1E9;
+    --ink:#16233C; --muted:#5A6579; --line:#E6E1D4;
+    --navy:#16294D; --navy-2:#26426F; --gold:#C6982F; --gold-2:#E0BC66;
+    --accent:#16294D; --btn-bg:#1E56D6; --btn-text:#FFFFFF;
+    --shadow:0 1px 2px rgba(22,41,77,.06), 0 12px 34px rgba(22,41,77,.10);
+    --radius:16px; --maxw:1080px;
+    --sans:'Figtree',system-ui,-apple-system,Segoe UI,sans-serif;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  }
+  :root:not([data-theme="light"]){ @media (prefers-color-scheme: dark){
+    --bg:#0C1526; --surface:#12203A; --surface-2:#172845;
+    --ink:#ECE8DD; --muted:#9AA6BD; --line:#27395C;
+    --navy:#335792; --navy-2:#4368A6; --gold:#D8AC43; --gold-2:#EBC978;
+    --accent:#E0BC66; --btn-bg:#3B74F0; --btn-text:#FFFFFF;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 16px 44px rgba(0,0,0,.5);
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0C1526; --surface:#12203A; --surface-2:#172845;
+    --ink:#ECE8DD; --muted:#9AA6BD; --line:#27395C;
+    --navy:#335792; --navy-2:#4368A6; --gold:#D8AC43; --gold-2:#EBC978;
+    --accent:#E0BC66; --btn-bg:#3B74F0; --btn-text:#FFFFFF;
+    --shadow:0 1px 2px rgba(0,0,0,.45), 0 16px 44px rgba(0,0,0,.5);
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:20px}
+  h1,h2,h3{font-family:var(--serif); font-weight:600; line-height:1.12; margin:0; text-wrap:balance}
+  a{color:inherit; text-decoration:none}
+
+  /* NAV */
+  header.nav{position:sticky; top:0; z-index:40; background:color-mix(in srgb,var(--bg) 90%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+  .nav-in{display:flex; align-items:center; gap:16px; height:70px}
+  .brand{display:flex; align-items:center; gap:10px}
+  .mark{width:56px; height:56px; flex:none; object-fit:contain}
+  .mark .arc-n{stroke:var(--navy)} .mark .arc-g{stroke:var(--gold)} .mark .house-fill{fill:var(--navy)} .mark .key{fill:var(--gold)}
+  .wordmark-stack{display:flex; flex-direction:column; gap:2px; line-height:1}
+  .pre{font-family:var(--sans); font-size:.58rem; font-weight:700; letter-spacing:.3em; color:var(--navy)}
+  :root:not([data-theme="light"]) .pre{color:var(--ink)}
+  .wordmark{font-family:var(--serif); font-size:1.35rem; font-weight:700; letter-spacing:.04em}
+  .wordmark .g{color:var(--gold)} .wordmark .n{color:var(--navy)}
+  :root:not([data-theme="light"]) .wordmark .n{color:var(--ink)}
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:0; cursor:pointer; font-family:var(--sans); font-weight:700; font-size:.95rem; padding:11px 18px; border-radius:999px; transition:.18s}
+  .btn-wa{background:var(--btn-bg); color:var(--btn-text)} .btn-wa:hover{filter:brightness(1.06); transform:translateY(-1px)}
+  .nav-cta{margin-left:auto}
+
+  .back{display:inline-flex; align-items:center; gap:7px; color:var(--muted); font-weight:600; font-size:.92rem; margin:22px 0 6px}
+  .back:hover{color:var(--accent)}
+
+  /* HEAD */
+  .head{display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap; margin-bottom:18px}
+  .tags{display:flex; gap:8px; margin-bottom:12px}
+  .tag{font-size:.74rem; font-weight:800; letter-spacing:.03em; padding:5px 11px; border-radius:999px}
+  .tag-venta{background:var(--navy); color:#fff} .tag-ref{background:var(--surface-2); color:var(--muted); border:1px solid var(--line)}
+  h1{font-size:clamp(1.7rem,3.6vw,2.5rem)}
+  .loc{color:var(--muted); margin-top:8px; display:flex; align-items:center; gap:7px; font-size:1rem}
+  .price-box{text-align:right}
+  .price{font-family:var(--serif); font-size:clamp(1.6rem,3.4vw,2.2rem); font-weight:700; color:var(--accent); white-space:nowrap}
+  .admin{font-size:.86rem; color:var(--muted)}
+
+  /* GALLERY */
+  .gallery{margin:8px 0 30px}
+  .gmain{position:relative; border-radius:var(--radius); overflow:hidden; background:#0d1a30; aspect-ratio:16/10; box-shadow:var(--shadow); cursor:zoom-in}
+  .gmain img{width:100%; height:100%; object-fit:cover; display:block}
+  .gcap{position:absolute; left:0; bottom:0; right:0; padding:16px 16px 12px; background:linear-gradient(transparent,rgba(9,18,34,.72)); color:#fff; font-weight:600; font-size:.92rem; display:flex; justify-content:space-between; align-items:flex-end; gap:10px}
+  .gcount{background:rgba(9,18,34,.6); padding:3px 10px; border-radius:999px; font-size:.8rem; backdrop-filter:blur(3px); white-space:nowrap}
+  .garrow{position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.9); border:0; cursor:pointer; display:grid; place-items:center; box-shadow:0 4px 14px rgba(0,0,0,.25); z-index:2; color:#16294D}
+  .garrow:hover{background:#fff} .gprev{left:14px} .gnext{right:14px}
+  .thumbs{display:flex; gap:9px; margin-top:12px; overflow-x:auto; padding-bottom:6px; scrollbar-width:thin}
+  .thumbs img{width:104px; height:70px; object-fit:cover; border-radius:9px; cursor:pointer; flex:none; border:2px solid transparent; opacity:.72; transition:.15s}
+  .thumbs img:hover{opacity:1}
+  .thumbs img.active{border-color:var(--gold); opacity:1}
+
+  /* LIGHTBOX */
+  .lb{position:fixed; inset:0; background:rgba(7,13,24,.94); z-index:100; display:none; align-items:center; justify-content:center}
+  .lb.open{display:flex}
+  .lb img{max-width:94vw; max-height:86vh; object-fit:contain; border-radius:8px}
+  .lb .lbcap{position:absolute; bottom:22px; left:0; right:0; text-align:center; color:#fff; font-weight:600; font-size:.95rem}
+  .lb .lbclose{position:absolute; top:18px; right:22px; width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.14); color:#fff; border:0; font-size:1.4rem; cursor:pointer}
+  .lb .lbarrow{position:absolute; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,.14); color:#fff; border:0; cursor:pointer; font-size:1.5rem}
+  .lb .lbprev{left:18px} .lb .lbnext{right:18px}
+
+  /* LAYOUT */
+  .cols{display:grid; grid-template-columns:1fr 320px; gap:34px; align-items:start}
+  @media(max-width:860px){ .cols{grid-template-columns:1fr} }
+
+  .specrow{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:6px 0 30px}
+  @media(max-width:520px){ .specrow{grid-template-columns:repeat(2,1fr)} }
+  .spec{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:12px}
+  .spec svg{width:22px; height:22px; stroke:var(--gold); fill:none; stroke-width:1.7; flex:none}
+  .spec b{font-family:var(--serif); font-size:1.15rem; display:block; line-height:1.1}
+  .spec span{font-size:.8rem; color:var(--muted)}
+
+  section.blk{margin-bottom:34px}
+  section.blk h2{font-size:1.35rem; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--line)}
+  .desc p{margin:0 0 14px; color:var(--ink)}
+  .feat{display:grid; grid-template-columns:1fr 1fr; gap:9px 18px}
+  @media(max-width:520px){ .feat{grid-template-columns:1fr} }
+  .feat div{display:flex; align-items:center; gap:9px; font-size:.95rem; color:var(--ink)}
+  .feat svg{width:16px; height:16px; stroke:var(--gold); fill:none; stroke-width:2; flex:none}
+
+  /* SIDEBAR CARD */
+  .side{position:sticky; top:90px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+  .side .price{text-align:left; font-size:1.7rem; margin-bottom:4px}
+  .side .admin{margin-bottom:16px}
+  .side .btn{width:100%; margin-bottom:10px; padding:13px}
+  .btn-share{background:transparent; border:1.5px solid var(--line); color:var(--ink)}
+  .btn-share:hover{border-color:var(--gold)}
+  .side .agent{margin-top:16px; padding-top:16px; border-top:1px solid var(--line); font-size:.88rem; color:var(--muted)}
+  .side .agent b{color:var(--ink); font-family:var(--serif); font-size:1rem}
+
+  footer{border-top:1px solid var(--line); padding:34px 0; color:var(--muted); font-size:.9rem; text-align:center; margin-top:20px}
+  .toast{position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--navy); color:#fff; padding:11px 20px; border-radius:999px; font-weight:600; font-size:.9rem; opacity:0; transition:.25s; pointer-events:none; z-index:120}
+  .toast.show{opacity:1}
+</style>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="oshebe-mark" viewBox="0 0 100 100">
+    <path class="arc-n" d="M50 8 A42 42 0 0 0 50 92" fill="none" stroke-width="8" stroke-linecap="round"/>
+    <path class="arc-g" d="M50 8 A42 42 0 0 1 50 92" fill="none" stroke-width="8" stroke-linecap="round"/>
+    <path class="house-fill" d="M50 33 L78 55 L71 55 L71 77 L29 77 L29 55 L22 55 Z"/>
+    <rect class="house-fill" x="60" y="35" width="6" height="14"/>
+    <circle class="key" cx="50" cy="61" r="5.6"/>
+    <path class="key" d="M47.2 63.5 h5.6 l1.5 12.5 h-8.6 z"/>
+  </symbol>
+</defs></svg>
+
+<header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="index.html"><img class="mark" src="assets/emblema.png" alt="Inmobiliaria Oshebe">
+    <span class="wordmark-stack"><span class="pre">INMOBILIARIA</span><span class="wordmark"><span class="g">OSH</span><span class="n">EBE</span></span></span>
+  </a>
+  <a class="btn btn-wa nav-cta" id="waTop" href="#">WhatsApp</a>
+</div></header>
+
+<main class="wrap">
+  <a class="back" href="index.html#inmuebles">← Volver a inmuebles</a>
+
+  <div class="head">
+    <div>
+      <div class="tags"><span class="tag tag-venta">En venta</span><span class="tag tag-ref">Ref. 990102</span></div>
+      <h1>Pent-House de lujo con vista al mar</h1>
+      <div class="loc">📍 Bello Horizonte · Irotama, Santa Marta</div>
+    </div>
+    <div class="price-box">
+      <div class="price">$1.700.000.000</div>
+      <div class="admin">Administración $900.000 / mes</div>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="gmain" id="gmain" onclick="openLB()">
+      <img id="mainImg" alt="Foto del inmueble">
+      <button class="garrow gprev" onclick="event.stopPropagation();step(-1)" aria-label="Anterior">‹</button>
+      <button class="garrow gnext" onclick="event.stopPropagation();step(1)" aria-label="Siguiente">›</button>
+      <div class="gcap"><span id="mainCap"></span><span class="gcount" id="gcount"></span></div>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+  </div>
+
+  <div class="specrow">
+    <div class="spec"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zM3 9h18M9 3v18"/></svg><div><b>180 m²</b><span>Área privada</span></div></div>
+    <div class="spec"><svg viewBox="0 0 24 24"><path d="M3 12h18M5 12V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5M4 18h16M6 18v2M18 18v2"/></svg><div><b>3</b><span>Habitaciones</span></div></div>
+    <div class="spec"><svg viewBox="0 0 24 24"><path d="M5 11V6a2 2 0 0 1 2-2 2 2 0 0 1 2 2M4 11h16v3a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/></svg><div><b>4</b><span>Baños</span></div></div>
+    <div class="spec"><svg viewBox="0 0 24 24"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13v5H5zM7 18v2M17 18v2M7 13h10"/></svg><div><b>2</b><span>Garajes</span></div></div>
+    <div class="spec"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12M9 21v-6h6v6"/></svg><div><b>Piso 18</b><span>Nivel</span></div></div>
+    <div class="spec"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 17l-5.5 2.5 1-6.3L3 8.9 9 8z"/></svg><div><b>Estrato 6</b><span>Exclusivo</span></div></div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <section class="blk desc">
+        <h2>Descripción</h2>
+        <p>¡Excelente oportunidad! Se vende espectacular <b>Pent-House</b> en el exclusivo sector de Bello Horizonte — Irotama, con una impresionante <b>vista al mar</b>. Este moderno apartamento de 180 m² está ubicado en el <b>piso 18</b>, ofreciendo un entorno privilegiado, tranquilo y lleno de lujo.</p>
+        <p>Cuenta con <b>3 amplias habitaciones, todas con baño privado</b>, lo que garantiza total privacidad y comodidad, además de un baño auxiliar para visitas. Dos de las habitaciones tienen <b>terrazas privadas</b>, perfectas para disfrutar de la brisa marina y las vistas panorámicas. Incluye <b>2 parqueaderos</b> y <b>1 bodega</b>.</p>
+        <p>El diseño interior es amplio y funcional, con sala y comedor ideales para compartir en familia, y una <b>cocina integral</b> completamente equipada. Además, tiene una zona de labores independiente. Este exclusivo Pent-House cuenta con <b>3 balcones</b> y un <b>jacuzzi en la terraza</b> con vista al mar.</p>
+        <p>¡No dejes pasar esta oportunidad! Vive en el corazón de Bello Horizonte, cerca de todo y rodeado de naturaleza y vistas espectaculares al mar.</p>
+      </section>
+
+      <section class="blk">
+        <h2>Características</h2>
+        <div class="feat">
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Cocina integral equipada</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Aire acondicionado</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Armarios empotrados y clósets</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Vestier (walk-in closet)</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Jacuzzi en terraza</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> 3 balcones · vista panorámica</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Zona de lavandería</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Depósito / bodega</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Gas domiciliario</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Baño auxiliar de visitas</div>
+        </div>
+      </section>
+
+      <section class="blk">
+        <h2>Zonas comunes del edificio</h2>
+        <div class="feat">
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Piscina</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Gimnasio</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Zona infantil</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Salón comunal / usos múltiples</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Ascensor</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Portería y vigilancia 24h</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Parqueadero de visitantes</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Planta eléctrica</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Zonas verdes y deportivas</div>
+          <div><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/></svg> Acceso para discapacitados</div>
+        </div>
+      </section>
+    </div>
+
+    <aside>
+      <div class="side">
+        <div class="price">$1.700.000.000</div>
+        <div class="admin">Administración $900.000 / mes</div>
+        <a class="btn btn-wa" id="waSide" href="#">💬 Escribir por WhatsApp</a>
+        <button class="btn btn-share" onclick="sharePage()">↗ Compartir inmueble</button>
+        <div class="agent">
+          <b>Inmobiliaria Oshebe</b><br>
+          Soluciones Inmobiliarias Integrales<br>
+          📱 +57 302 335 0442<br>
+          ✉️ inmobiliariaoshebe@gmail.com
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>© 2026 Inmobiliaria Oshebe · Bello Horizonte, Santa Marta · Ref. 990102</footer>
+<div class="toast" id="toast">Enlace copiado ✓</div>
+
+<script>
+const PHOTOS = [{src:"img/990102/p09.jpg",cap:"Vista al mar desde el balcón"},{src:"img/990102/p02.jpg",cap:"Jacuzzi en la terraza con vista al mar"},{src:"img/990102/p12.jpg",cap:"Sala amplia y luminosa"},{src:"img/990102/p13.jpg",cap:"Comedor"},{src:"img/990102/p14.jpg",cap:"Cocina integral equipada"},{src:"img/990102/p05.jpg",cap:"Habitación principal con vista"},{src:"img/990102/p07.jpg",cap:"Habitación con vista a la montaña"},{src:"img/990102/p03.jpg",cap:"Habitación con clóset"},{src:"img/990102/p11.jpg",cap:"Habitación"},{src:"img/990102/p16.jpg",cap:"Habitación"},{src:"img/990102/p04.jpg",cap:"Vestier · walk-in closet"},{src:"img/990102/p17.jpg",cap:"Baño con vestier"},{src:"img/990102/p08.jpg",cap:"Baño"},{src:"img/990102/p15.jpg",cap:"Baño"},{src:"img/990102/p01.jpg",cap:"Terraza principal"},{src:"img/990102/p10.jpg",cap:"Terraza superior con vista al mar"},{src:"img/990102/p06.jpg",cap:"Vista a la Sierra Nevada"}];
+const WA = "https://wa.me/573023350442?text=" + encodeURIComponent("Hola Oshebe, estoy interesado en el Pent-House de Bello Horizonte (Ref. 990102 · $1.700.000.000). ¿Me pueden dar más información?");
+document.getElementById('waTop').href = WA;
+document.getElementById('waSide').href = WA;
+
+let idx = 0;
+const mainImg = document.getElementById('mainImg');
+const mainCap = document.getElementById('mainCap');
+const gcount = document.getElementById('gcount');
+const thumbs = document.getElementById('thumbs');
+
+PHOTOS.forEach((p,i)=>{
+  const t = document.createElement('img');
+  t.src = p.src; t.alt = p.cap; t.loading = 'lazy';
+  t.onclick = ()=>{ idx=i; render(); };
+  thumbs.appendChild(t);
+});
+function render(){
+  const p = PHOTOS[idx];
+  mainImg.src = p.src; mainImg.alt = p.cap;
+  mainCap.textContent = p.cap;
+  gcount.textContent = (idx+1)+' / '+PHOTOS.length;
+  [...thumbs.children].forEach((c,i)=>c.classList.toggle('active', i===idx));
+  const active = thumbs.children[idx];
+  if(active) active.scrollIntoView({inline:'nearest', block:'nearest'});
+  if(lb.classList.contains('open')){ lbImg.src=p.src; lbCap.textContent=p.cap; }
+}
+function step(d){ idx=(idx+d+PHOTOS.length)%PHOTOS.length; render(); }
+
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+function openLB(){ lb.classList.add('open'); render(); }
+function closeLB(){ lb.classList.remove('open'); }
+document.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight') step(1);
+  else if(e.key==='ArrowLeft') step(-1);
+  else if(e.key==='Escape') closeLB();
+});
+
+function sharePage(){
+  const data={ title:'Pent-House Bello Horizonte · Oshebe', text:'Pent-House de lujo con vista al mar en Bello Horizonte, Santa Marta — $1.700.000.000', url:location.href };
+  if(navigator.share){ navigator.share(data).catch(()=>{}); }
+  else { navigator.clipboard.writeText(location.href).then(showToast); }
+}
+function showToast(){ const t=document.getElementById('toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800); }
+
+render();
+</script>
+
+<div class="lb" id="lb">
+  <button class="lbclose" onclick="closeLB()" aria-label="Cerrar">✕</button>
+  <button class="lbarrow lbprev" onclick="step(-1)" aria-label="Anterior">‹</button>
+  <img id="lbImg" alt="">
+  <button class="lbarrow lbnext" onclick="step(1)" aria-label="Siguiente">›</button>
+  <div class="lbcap" id="lbCap"></div>
+</div>
