@@ -17,6 +17,8 @@ const WA_VENDER = waLink('Hola Oshebe, quiero vender o arrendar mi inmueble en S
 function mailLink(subject){ return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subject); }
 const ZONAS = ['El Rodadero','Bello Horizonte','Pozos Colorados','Centro Histórico','Gaira','Mamatoco','Bavaria','Ciudad del Sol','Irotama','Taganga','Minca'];
 const TIPOS = ['Casa','Apartamento','Apartaestudio','Local','Oficina','Bodega','Lote','Finca'];
+// Código de verificación de Google Search Console (pegar entre las comillas cuando Google lo dé).
+const GSC = '';
 
 const SRC = __dirname;
 const OUT = path.join(SRC, 'dist');
@@ -323,6 +325,10 @@ function head(opts){
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(opts.title)}</title>
 <meta name="description" content="${esc(opts.desc)}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="geo.region" content="CO-MAG">
+<meta name="geo.placename" content="Santa Marta">
+${GSC ? '<meta name="google-site-verification" content="' + esc(GSC) + '">' : ''}
 <link rel="canonical" href="${esc(opts.url)}">
 <meta property="og:type" content="${opts.ogType || 'website'}">
 <meta property="og:title" content="${esc(opts.title)}">
@@ -336,6 +342,7 @@ function head(opts){
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Figtree:wght@400;500;600;700&display=swap">
 <style>${opts.css}</style>
+${opts.jsonld || ''}
 </head>`;
 }
 
@@ -380,12 +387,22 @@ function renderIndex(props){
   // El hero usa un collage de fondo con fotos de Santa Marta (img/portada/sm1..sm4.jpg).
   const zonaOpts = ZONAS.map(function(z){ return '<option value="' + esc(z) + '">' + esc(z) + '</option>'; }).join('');
   const tipoOpts = TIPOS.map(function(t){ return '<option value="' + esc(t) + '">' + esc(t) + '</option>'; }).join('');
+  const homeJsonld = '<script type="application/ld+json">' + JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'RealEstateAgent',
+    name: 'Inmobiliaria Oshebe', image: SITE_URL + '/assets/emblema.png', logo: SITE_URL + '/assets/emblema.png',
+    url: SITE_URL + '/', telephone: '+573023350442', email: EMAIL,
+    description: 'Inmobiliaria en Santa Marta: venta y arriendo de casas, apartamentos y locales. Más de 10 años de experiencia.',
+    areaServed: { '@type': 'City', name: 'Santa Marta' },
+    address: { '@type': 'PostalAddress', addressLocality: 'Santa Marta', addressRegion: 'Magdalena', addressCountry: 'CO' },
+    sameAs: ['https://instagram.com/inmobiliariaoshebe', 'https://facebook.com/inmobiliariaoshebe']
+  }) + '</scr' + 'ipt>';
   return head({
     title: 'Inmobiliaria Oshebe · Inmuebles en Santa Marta',
     desc: 'Casas, apartamentos y locales en venta y arriendo en Santa Marta. Fotos reales, recorridos en video y asesoría directa por WhatsApp.',
     url: SITE_URL + '/',
     image: ogImg,
-    css: CSS_INDEX
+    css: CSS_INDEX,
+    jsonld: homeJsonld
   }) + `
 <body>
 <header class="nav"><div class="wrap nav-in">
@@ -564,6 +581,10 @@ function renderFicha(p){
   const opTagCls = p.operacion === 'arriendo' ? 'tag-arriendo' : 'tag-venta';
   const waText = 'Hola Oshebe, estoy interesado en el ' + p.titulo + ' (Ref. ' + p.ref + ' · ' + fmtPrecioPlano(p.precio) + '). ¿Me pueden dar más información?';
   const WA = waLink(waText);
+  const descLD = p.titulo + ' en ' + loc + '. ' + [p.habitaciones && (p.habitaciones + ' habitaciones'), p.banos && (p.banos + ' baños'), p.area_m2 && (p.area_m2 + ' m²')].filter(Boolean).join(', ') + '.';
+  var ld = { '@context': 'https://schema.org', '@type': 'Product', name: p.titulo, image: [SITE_URL + first], description: descLD, category: (p.tipo || 'Inmueble'), url: url, brand: { '@type': 'Organization', name: 'Inmobiliaria Oshebe' } };
+  if (p.precio != null && p.precio !== '') { ld.offers = { '@type': 'Offer', price: String(p.precio), priceCurrency: 'COP', availability: 'https://schema.org/InStock', url: url }; }
+  const propJsonld = '<script type="application/ld+json">' + JSON.stringify(ld) + '</scr' + 'ipt>';
 
   const specs = [];
   if(p.area_m2 != null && p.area_m2 !== '') specs.push(specCell('<path d="M3 3h18v18H3zM3 9h18M9 3v18"/>', p.area_m2 + ' m²', 'Área privada'));
@@ -592,7 +613,8 @@ function renderFicha(p){
     url: url,
     image: SITE_URL + first,
     ogType: 'article',
-    css: CSS_FICHA
+    css: CSS_FICHA,
+    jsonld: propJsonld
   }) + `
 <body>
 <header class="nav"><div class="wrap nav-in">
@@ -764,6 +786,16 @@ function main(){
   // assets estáticos
   copyDir(path.join(SRC, 'assets'), path.join(OUT, 'assets'));
   copyDir(path.join(SRC, 'img'), path.join(OUT, 'img'));
+
+  // sitemap.xml + robots.txt (SEO)
+  var today = new Date().toISOString().slice(0, 10);
+  var urls = ['<url><loc>' + SITE_URL + '/</loc><lastmod>' + today + '</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>'];
+  props.forEach(function(p){
+    urls.push('<url><loc>' + SITE_URL + '/inmueble-' + p.ref + '.html</loc><lastmod>' + today + '</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>');
+  });
+  var sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls.join('\n') + '\n</urlset>\n';
+  fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemap);
+  fs.writeFileSync(path.join(OUT, 'robots.txt'), 'User-agent: *\nAllow: /\n\nSitemap: ' + SITE_URL + '/sitemap.xml\n');
 
   console.log('OK — ' + props.length + ' inmueble(s) generado(s) en dist/');
 }
