@@ -1,0 +1,49 @@
+{
+  "ref": "990120",
+  "titulo": "Casa Urbanizacion Alcazares",
+  "operacion": "venta",
+  "tipo": "Casa",
+  "zona": "Bavaria",
+  "precio": 300000000,
+  "administracion": 0,
+  "sector": "Alcazares",
+  "ciudad": "Santa Marta",
+  "area_m2": 100,
+  "habitaciones": 3,
+  "banos": 2,
+  "garajes": 1,
+  "estrato": "4",
+  "descripcion": "Se vende amplia casa de dos pisos ubicada en la **Urbanización Alcázares**, en un sector estratégico y de fácil acceso, cerca de **clínicas, supermercados y el Centro Comercial Ocean Mall**.\n\nLa propiedad se encuentra en una zona residencial abierta, **no pertenece a conjunto cerrado**, y cuenta con una distribución funcional:\n\n- 3 habitaciones.\n- 2 baños externos\n- Casa de dos pisos.\n\nUna excelente opción para quienes buscan comodidad, buena ubicación y cercanía a importantes servicios y zonas comerciales de la ciudad.",
+  "fotos": [
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-08-20-10-33-43 16-1.jpg",
+      "titulo": "Sala Comedor"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-08-20-10-33-43 12.jpg",
+      "titulo": "baño social"
+    },
+    {
+      "imagen": "/img/inmuebles/~tmp78_PHOTO-2026-08-20-10-33-43-1.jpg",
+      "titulo": "patio de labores"
+    },
+    {
+      "imagen": "/img/inmuebles/~tmp00_PHOTO-2026-08-20-10-33-43-1.jpg",
+      "titulo": "baño"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-08-20-10-33-43 1.jpg",
+      "titulo": "habitacion 1"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-08-20-10-33-43 10.jpg",
+      "titulo": "habitacion 2"
+    },
+    {
+      "imagen": "/img/inmuebles/PHOTO-2026-08-20-10-33-43 3.jpg",
+      "titulo": "habitacion 3"
+    }
+  ],
+  "destacado": true,
+  "publicado": true
+}
