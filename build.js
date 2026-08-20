@@ -797,6 +797,9 @@ function main(){
   fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemap);
   fs.writeFileSync(path.join(OUT, 'robots.txt'), 'User-agent: *\nAllow: /\n\nSitemap: ' + SITE_URL + '/sitemap.xml\n');
 
+  // Verificación de Google Search Console (método archivo HTML)
+  fs.writeFileSync(path.join(OUT, 'googlebaf289dd450fb1ca.html'), 'google-site-verification: googlebaf289dd450fb1ca.html');
+
   console.log('OK — ' + props.length + ' inmueble(s) generado(s) en dist/');
 }
 
