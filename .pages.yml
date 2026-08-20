@@ -1,0 +1,94 @@
+media:
+  input: img/inmuebles
+  output: /img/inmuebles
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: inmuebles
+    label: Inmuebles
+    type: collection
+    path: data/inmuebles
+    filename: '{fields.ref}.json'
+    format: json
+    view:
+      fields: [titulo, sector, precio, operacion, publicado]
+    fields:
+      - name: ref
+        label: Referencia (código del inmueble)
+        type: string
+        required: true
+        description: 'Un código único, por ejemplo 990102. Se usa en el enlace del inmueble.'
+      - name: titulo
+        label: Título
+        type: string
+        required: true
+      - name: operacion
+        label: Operación
+        type: select
+        default: venta
+        options:
+          values: [venta, arriendo]
+      - name: precio
+        label: Precio (en pesos, sin puntos)
+        type: number
+      - name: administracion
+        label: Administración mensual (opcional)
+        type: number
+      - name: sector
+        label: Sector / Barrio
+        type: string
+      - name: ciudad
+        label: Ciudad
+        type: string
+        default: Santa Marta
+      - name: area_m2
+        label: Área (m²)
+        type: number
+      - name: habitaciones
+        label: Habitaciones
+        type: number
+      - name: banos
+        label: Baños
+        type: number
+      - name: garajes
+        label: Garajes
+        type: number
+      - name: piso
+        label: Piso
+        type: string
+      - name: estrato
+        label: Estrato
+        type: string
+      - name: descripcion
+        label: Descripción
+        type: rich-text
+      - name: caracteristicas
+        label: Características
+        type: string
+        list: true
+      - name: zonas_comunes
+        label: Zonas comunes del edificio
+        type: string
+        list: true
+      - name: video_youtube
+        label: Video de YouTube (pega el enlace, opcional)
+        type: string
+      - name: fotos
+        label: Fotos
+        type: object
+        list: true
+        fields:
+          - name: imagen
+            label: Imagen
+            type: image
+          - name: titulo
+            label: Texto de la foto
+            type: string
+      - name: destacado
+        label: Mostrar en la portada
+        type: boolean
+        default: true
+      - name: publicado
+        label: Publicado (visible en el sitio)
+        type: boolean
+        default: true
